@@ -1,0 +1,16 @@
+extends layout.pug
+
+block css
+    link(rel="stylesheet", href="/static/css/update.css")
+
+
+block content
+    form(action=`/memory/${memory._id}/update`, method="POST" enctype="multipart/form-data")
+        img(src=`/${memory.thumbnail}`)#preview
+        #js-fileName
+        input(type="file" name="thumbnail")
+        input(type="text" name="title" value=memory.title placeholder="제목")
+        textarea(name="description" placeholder="본문")=memory.description
+        button 업데이트
+block js
+    script(src="/static/js/imagePreview.js") 

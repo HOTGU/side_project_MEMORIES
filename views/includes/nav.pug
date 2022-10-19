@@ -1,0 +1,9 @@
+nav 
+    ul
+        if isLogin
+            a(href="/") home 
+            a(href="/logout") 로그아웃
+            a(href="/memory") memory
+        else
+            a(href="/") home 
+            a(href="/login") 로그인

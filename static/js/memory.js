@@ -1,0 +1,1 @@
+"use strict";var world=function(){console.log("world"),console.log(2)};world();

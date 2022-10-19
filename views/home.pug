@@ -1,0 +1,7 @@
+extends layout.pug
+
+block content
+  if isLogin
+    h1=user.name 
+  else 
+    h1 로그인하세요
