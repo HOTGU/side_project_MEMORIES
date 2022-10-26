@@ -4,6 +4,7 @@ dotenv.config();
 
 import User from "../model/User.js";
 import createError from "../utils/createError.js";
+import transport from "../utils/sendEmail.js";
 
 export const home = (req, res) => {
     res.render("home", { title: "Home" });
@@ -35,6 +36,16 @@ export const joinPost = async (req, res, next) => {
             email,
             password: hashedPassword,
         });
+
+        console.log(newUser);
+
+        const result = await transport.sendMail({
+            from: newUser.email, // 보내는 메일의 주소
+            to: process.env.NODEMAILER_MAIL, // 수신할 이메일
+            subject: "hello world", // 메일 제목
+            text: "hello world", // 메일 내용
+        });
+        console.log(result);
 
         await newUser.save();
 
@@ -75,4 +86,42 @@ export const loginPost = async (req, res, next) => {
 export const logout = (req, res, next) => {
     req.session.destroy();
     res.redirect("/");
+};
+
+export const me = (req, res, next) => {
+    res.render("me");
+};
+
+export const meUpdate = (req, res, next) => {
+    res.render("meUpdate");
+};
+
+export const meUpdatePost = async (req, res, next) => {
+    const {
+        user,
+        body: { name },
+        file,
+    } = req;
+    try {
+        const updateUser = await User.findByIdAndUpdate(
+            user._id,
+            {
+                name,
+                avatar: file?.path,
+            },
+            { new: true }
+        );
+        console.log(updateUser);
+        const userInfo = { ...updateUser._doc };
+
+        const { password, ...otherInfo } = userInfo;
+
+        req.session.user = otherInfo;
+        req.session.isLogin = true;
+
+        return res.redirect("/me");
+    } catch (error) {
+        next(error);
+    }
+    // res.render("meUpdate");
 };

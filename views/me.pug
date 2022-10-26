@@ -1,0 +1,14 @@
+extends layout.pug
+
+block css
+    link(rel="stylesheet" type="text/css" href="/static/css/imgPreview.css")
+
+block content
+    if user.avatar
+        img(src=user.avatar).imgAvatar
+    else
+        img(src="/static/images/no_user.jpg").imgAvatar
+    h1=user.name
+
+    a(href="/me/update")
+        button 수정하기

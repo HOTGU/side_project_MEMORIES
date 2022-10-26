@@ -1,5 +1,5 @@
 const img = document.querySelector("img");
-const imgFile = document.querySelector("input[name=thumbnail]");
+const imgFile = document.querySelector("input[type=file]");
 const fileName = document.getElementById("js-fileName");
 
 imgFile.style.display = "none";

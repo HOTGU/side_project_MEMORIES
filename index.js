@@ -7,6 +7,10 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import sessions from "express-session";
 import MongoStore from "connect-mongo";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import globalRouter from "./routes/globalRouter.js";
 import memoryRouter from "./routes/memoryRouter.js";
@@ -59,7 +63,7 @@ app.use(
 
 app.set("view engine", "pug");
 app.use("/src", express.static("src"));
-app.use("/static", express.static("static"));
+app.use("/static", express.static(__dirname + "/static"));
 app.use("/uploads", express.static("uploads"));
 
 app.use(resLocalsMiddleware);

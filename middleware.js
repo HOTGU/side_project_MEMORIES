@@ -2,7 +2,8 @@ import createError from "./utils/createError.js";
 import Memory from "./model/Memory.js";
 import multer from "multer";
 
-export const uploadMulter = multer({ dest: "uploads/" });
+export const thumbnailMulter = multer({ dest: "uploads/thumbnail" });
+export const avatarMulter = multer({ dest: "uploads/avatar" });
 
 export const resLocalsMiddleware = (req, res, next) => {
     res.locals.isLogin = Boolean(req.session.isLogin);

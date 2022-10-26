@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { isCreator, uploadMulter } from "../middleware.js";
+import { isCreator, thumbnailMulter } from "../middleware.js";
 import {
     detail,
     home,
@@ -17,12 +17,12 @@ memoryRouter.get("/", home);
 
 memoryRouter.get("/upload", upload);
 
-memoryRouter.post("/upload", uploadMulter.single("thumbnail"), uploadPost);
+memoryRouter.post("/upload", thumbnailMulter.single("thumbnail"), uploadPost);
 
 memoryRouter.get("/:id", detail);
 
 memoryRouter.get("/:id/update", isCreator, renderUpdate);
-memoryRouter.post("/:id/update", isCreator, uploadMulter.single("thumbnail"), update);
+memoryRouter.post("/:id/update", isCreator, thumbnailMulter.single("thumbnail"), update);
 memoryRouter.get("/:id/delete", isCreator, remove);
 
 export default memoryRouter;

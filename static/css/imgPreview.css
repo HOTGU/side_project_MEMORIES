@@ -1,0 +1,21 @@
+form #preview {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+form #preview:hover {
+  transform: scale(1.03);
+}
+form img {
+  object-fit: cover;
+}
+
+.imgAvatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.imgThumbnail {
+  width: 200px;
+  height: 200px;
+}
