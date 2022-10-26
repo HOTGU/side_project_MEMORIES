@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { isCreator, thumbnailMulter } from "../middleware.js";
+import { isCreator, isVerifiedEmail, thumbnailMulter } from "../middleware.js";
 import {
     detail,
     home,
@@ -13,16 +13,27 @@ import {
 
 const memoryRouter = express.Router();
 
-memoryRouter.get("/", home);
+memoryRouter.get("/", isVerifiedEmail, home);
 
-memoryRouter.get("/upload", upload);
+memoryRouter.get("/upload", isVerifiedEmail, upload);
 
-memoryRouter.post("/upload", thumbnailMulter.single("thumbnail"), uploadPost);
+memoryRouter.post(
+    "/upload",
+    isVerifiedEmail,
+    thumbnailMulter.single("thumbnail"),
+    uploadPost
+);
 
-memoryRouter.get("/:id", detail);
+memoryRouter.get("/:id", isVerifiedEmail, detail);
 
-memoryRouter.get("/:id/update", isCreator, renderUpdate);
-memoryRouter.post("/:id/update", isCreator, thumbnailMulter.single("thumbnail"), update);
-memoryRouter.get("/:id/delete", isCreator, remove);
+memoryRouter.get("/:id/update", isVerifiedEmail, isCreator, renderUpdate);
+memoryRouter.post(
+    "/:id/update",
+    isVerifiedEmail,
+    isCreator,
+    thumbnailMulter.single("thumbnail"),
+    update
+);
+memoryRouter.get("/:id/delete", isVerifiedEmail, isCreator, remove);
 
 export default memoryRouter;

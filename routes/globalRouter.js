@@ -9,18 +9,25 @@ import {
     me,
     meUpdate,
     meUpdatePost,
+    verifyEmail,
 } from "../controllers/globalController.js";
-import { avatarMulter } from "../middleware.js";
+import { avatarMulter, isVerifiedEmail } from "../middleware.js";
 
 const globalRouter = express.Router();
 
 globalRouter.get("/", home);
+globalRouter.get("/verify", verifyEmail);
 globalRouter.get("/logout", logout);
 
-globalRouter.get("/me", me);
+globalRouter.get("/me", isVerifiedEmail, me);
 
-globalRouter.get("/me/update", meUpdate);
-globalRouter.post("/me/update", avatarMulter.single("avatar"), meUpdatePost);
+globalRouter.get("/me/update", isVerifiedEmail, meUpdate);
+globalRouter.post(
+    "/me/update",
+    isVerifiedEmail,
+    avatarMulter.single("avatar"),
+    meUpdatePost
+);
 
 globalRouter.route("/join").get(join).post(joinPost);
 

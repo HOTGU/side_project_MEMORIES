@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    emailVerifyNumber: {
+    emailVerifyString: {
         type: String,
         default: uuidv4(),
     },

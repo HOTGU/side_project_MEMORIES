@@ -7,8 +7,9 @@ export const avatarMulter = multer({ dest: "uploads/avatar" });
 
 export const resLocalsMiddleware = (req, res, next) => {
     res.locals.isLogin = Boolean(req.session.isLogin);
-    res.locals.user = req.session.user || {};
+    res.locals.user = req.session.user || undefined;
     res.locals.siteName = "Memories";
+    res.locals.message = req.flash();
     req.user = req.session.user || {};
     next();
 };
@@ -27,4 +28,14 @@ export const isCreator = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+};
+
+export const isVerifiedEmail = (req, res, next) => {
+    const { user } = req;
+
+    if (!user.emailVerify) {
+        req.flash("error", "이메일인증이 안됐습니다");
+        return res.redirect("/");
+    }
+    next();
 };

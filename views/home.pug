@@ -1,7 +1,10 @@
 extends layout.pug
 
 block content
-  if isLogin
-    h1=user.name 
+  if user
+    if user.emailVerify
+      h1=user.name
+    else 
+      h1 이메일인증이 안됐습니다.
   else 
     h1 로그인하세요
