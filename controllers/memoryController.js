@@ -94,6 +94,6 @@ export const search = async (req, res, next) => {
             req.flash("error", "검색어가 없습니다");
             return res.redirect("/");
         }
-        console.log(2);
+        console.log(3);
     } catch (error) {}
 };
