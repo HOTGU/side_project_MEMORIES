@@ -1,0 +1,16 @@
+.btn {
+    width: 100px;
+    height: 40px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: white;
+}
+.updateBtn {
+    background-color: $blue;
+    color: $white;
+}
+.deleteBtn {
+    background-color: $red;
+    color: $white;
+}

@@ -1,0 +1,14 @@
+include userBlock
+
+mixin memoryBlock(memory={})
+  .memoryWrapper
+    a(href=`/memory/${memory._id}`)
+      .memory
+        img(src=`/${memory.thumbnail}`)
+        h3=memory.title
+    a(href=`/user`)
+      +userBlock({
+        avatar:memory.creator.avatar,
+        name:memory.creator.name
+      })
+  script(src="../../static/js/memoryHover.js") 

@@ -1,0 +1,90 @@
+@import "_variable";
+
+@keyframes message {
+    0% {
+        transform: translateY(-200px);
+    }
+    20% {
+        transform: translateY(20px);
+    }
+    80% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(-200px);
+    }
+}
+
+.messageContainer {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    transform: translateY(-200px);
+    justify-content: center;
+    align-items: center;
+    animation: message 3s ease-in-out;
+    .message {
+        min-width: 240px;
+        width: fit-content;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 25px;
+        font-weight: 600;
+    }
+    #success {
+        background-color: #156e3a;
+        color: white;
+    }
+    #error {
+        background-color: #7b261c;
+        color: white;
+    }
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: $fontFamily;
+    background-color: $bgColor;
+    color: $textColor;
+    .fullContainer {
+        width: 100%;
+    }
+    .container {
+        max-width: 1480px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 0 10px;
+    }
+    .bodyWrapper {
+        height: auto;
+        min-height: 90%;
+        margin-bottom: $footerHeight;
+    }
+}
+
+footer {
+    border-top: 1px solid $borderColor;
+    height: $footerHeight;
+    position: relative;
+    transform: translateY(-100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input,
+textarea {
+    font-size: 14px;
+    outline: none;
+    border: 1px solid $borderColor;
+    border-radius: 5px;
+    resize: none;
+}

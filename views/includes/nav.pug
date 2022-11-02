@@ -1,10 +1,12 @@
-nav 
-    ul
-        if user
-            a(href="/") home 
-            a(href="/logout") 로그아웃
-            a(href="/memory") memory
-            a(href="/me") 내프로필
-        else
-            a(href="/") home 
-            a(href="/login") 로그인
+nav.fullContainer
+    .container
+        ul
+            a(href="/").logo
+                div.logo__title Memories
+                img(src="/static/images/memories_logo.png")
+            .nav
+                if user
+                    a(href="/me") 내프로필
+                    a(href="/logout") 로그아웃
+                else
+                    a(href="/login") 로그인

@@ -1,4 +1,4 @@
-const img = document.querySelector("img");
+const img = document.getElementById("preview");
 const imgFile = document.querySelector("input[type=file]");
 const fileName = document.getElementById("js-fileName");
 

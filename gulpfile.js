@@ -1,6 +1,7 @@
 import gulpPkg from "gulp";
 const { src, dest, watch, series } = gulpPkg;
 import clean from "gulp-clean";
+import cleanCss from "gulp-clean-css";
 
 import defaultSass from "sass";
 import gulpSass from "gulp-sass";
@@ -10,8 +11,9 @@ import babel from "gulp-babel";
 import uglify from "gulp-uglify";
 
 const css = (cb) => {
-    src("./src/sass/**/*.scss")
+    src("./src/sass/styles.scss")
         .pipe(sass().on("error", sass.logError))
+        .pipe(cleanCss({ compatibiliy: "ie8" }))
         .pipe(dest("./static/css"));
     cb();
 };
@@ -30,15 +32,13 @@ const cleanJs = (cb) => {
     src("./static/js/*.js").pipe(clean({ read: false }));
     cb();
 };
-const cleanCss = (cb) => {
-    src("./static/css/*.js").pipe(clean({ read: false }));
-    cb();
-};
+// const cleanCss = (cb) => {
+//     src("./static/css/**/*.css").pipe(clean({ read: false }));
+//     cb();
+// };
 
 const watchFiles = () => {
     watch("./src/js/**/*.js", cleanJs);
-    watch("./src/sass/**/*.scss", cleanCss);
-
     watch("./src/js/**/*.js", js);
     watch("./src/images/*", image);
     watch("./src/sass/**/*.scss", css);

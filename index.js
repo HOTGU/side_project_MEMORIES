@@ -1,4 +1,5 @@
 import express from "express";
+import csrf from "csurf";
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
@@ -19,6 +20,7 @@ import userRouter from "./routes/userRouter.js";
 import { resLocalsMiddleware } from "./middleware.js";
 
 const app = express();
+const csrfProtection = csrf({ cookie: true });
 
 mongoose.connect(process.env.DEV_MONGO_URL, {
     useNewUrlParser: true,
@@ -70,6 +72,11 @@ app.use("/static", express.static(__dirname + "/static"));
 app.use("/uploads", express.static("uploads"));
 
 app.use(resLocalsMiddleware);
+// app.use(csrfProtection);
+// app.use((req, res, next) => {
+//     res.cookie("X-CSRF-TOKEN", req.csrfToken());
+//     next();
+// });
 
 app.use("/", globalRouter);
 app.use("/memory", memoryRouter);
@@ -78,7 +85,7 @@ app.use("/user", userRouter);
 app.use((err, req, res, next) => {
     console.log(err);
     const errorStatus = err.status || 500;
-    const errorMessage = err.message || "뭔가 오류가 생겼습니다";
+    const errorMessage = err.message || "오류가 생겼습니다";
     return res.render("error", { errorStatus, errorMessage });
 });
 

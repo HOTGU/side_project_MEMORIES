@@ -1,0 +1,29 @@
+@import "../config/_variable";
+
+nav {
+    padding: 20px 0;
+    border-bottom: 1px solid $borderColor;
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+        a {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+        }
+        .nav {
+            display: flex;
+            gap: 10px;
+        }
+        .logo {
+            &__title {
+                font-size: 24px;
+                font-weight: 600;
+            }
+            img {
+                width: 30px;
+            }
+        }
+    }
+}

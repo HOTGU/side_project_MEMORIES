@@ -1,10 +1,25 @@
 extends layout.pug
+include mixins/memoryBlock
 
 block content
-  if user
-    if user.emailVerify
-      h1=user.name
+  .container
+    if user
+      if user.emailVerify
+        .homeHead
+          a(href="/memory/upload")
+            .homeHead__btn 업로드 ⬆
+          form(action=`/search` method="GET")
+            input(name="searchTerm" type="text" placeholder="검색")
+        .memoryContainer
+          each memory in memories
+            +memoryBlock({
+              _id:memory._id,
+              thumbnail:memory.thumbnail,
+              title:memory.title,
+              description:memory.description,
+              creator:memory.creator
+            })
+      else 
+        h1.center 이메일인증이 안됐습니다.
     else 
-      h1 이메일인증이 안됐습니다.
-  else 
-    h1 로그인하세요
+      h1.center 로그인하세요

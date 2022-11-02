@@ -1,11 +1,10 @@
 import express from "express";
-import multer from "multer";
 import { isCreator, isVerifiedEmail, thumbnailMulter } from "../middleware.js";
 import {
     detail,
-    home,
     remove,
     renderUpdate,
+    search,
     update,
     upload,
     uploadPost,
@@ -13,9 +12,9 @@ import {
 
 const memoryRouter = express.Router();
 
-memoryRouter.get("/", isVerifiedEmail, home);
-
 memoryRouter.get("/upload", isVerifiedEmail, upload);
+
+memoryRouter.get("/search", isVerifiedEmail, search);
 
 memoryRouter.post(
     "/upload",

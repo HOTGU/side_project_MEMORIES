@@ -2,12 +2,19 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
 
+import Memory from "../model/Memory.js";
 import User from "../model/User.js";
 import createError from "../utils/createError.js";
 import deletePassword from "../utils/deletePassword.js";
 import transport from "../utils/sendEmail.js";
 
-export const home = (req, res) => {
+export const home = async (req, res) => {
+    try {
+        const memories = await Memory.find().populate("creator");
+        return res.render("home", { title: "Home", memories });
+    } catch (error) {
+        next(error);
+    }
     res.render("home", { title: "Home" });
 };
 
@@ -21,13 +28,15 @@ export const joinPost = async (req, res, next) => {
     } = req;
     try {
         if (bodyPassword !== password1) {
-            return next(createError(500, "비밀번호가 틀립니다"));
+            req.flash("error", "비밀번호가 틀립니다");
+            return res.redirect("/join");
         }
 
         const existUser = await User.exists({ email });
 
         if (existUser) {
-            return next(createError(500, "이메일로 가입된 유저가 있습니다"));
+            req.flash("error", "이메일로 가입된 유저가 있습니다");
+            return res.redirect("/login");
         }
 
         const hashedPassword = bcrypt.hashSync(bodyPassword, +process.env.BCRYPT_SALT);
@@ -57,7 +66,7 @@ export const joinPost = async (req, res, next) => {
 };
 
 export const login = (req, res, next) => {
-    res.render("login");
+    res.render("login", { title: "Log in" });
 };
 
 export const loginPost = async (req, res, next) => {
@@ -66,10 +75,17 @@ export const loginPost = async (req, res, next) => {
     } = req;
     try {
         const user = await User.findOne({ email });
-        if (!user) return next(createError(400, "이메일로 가입된 유저가 없습니다"));
+
+        if (!user) {
+            req.flash("error", "이메일로 가입된 유저가 없습니다");
+            return res.redirect("/join");
+        }
 
         const checkPassword = bcrypt.compareSync(bodyPassword, user.password);
-        if (!checkPassword) return next(createError(400, "비밀번호가 틀립니다"));
+        if (!checkPassword) {
+            req.flash("error", "비밀번호가 틀립니다");
+            return res.redirect("/login");
+        }
 
         const noPwUser = deletePassword(user);
 
@@ -85,17 +101,16 @@ export const loginPost = async (req, res, next) => {
 
 export const logout = (req, res, next) => {
     req.session.user = undefined;
-    req.session.isLogin = false;
     req.flash("success", "로그아웃 성공👋");
     return res.redirect("/");
 };
 
 export const me = (req, res, next) => {
-    res.render("me");
+    res.render("me", { title: "Me" });
 };
 
 export const meUpdate = (req, res, next) => {
-    res.render("meUpdate");
+    res.render("meUpdate", { title: "Update" });
 };
 
 export const meUpdatePost = async (req, res, next) => {
@@ -115,7 +130,7 @@ export const meUpdatePost = async (req, res, next) => {
         );
 
         const noPwUser = deletePassword(updateUser);
-        req.user = noPwUser;
+        req.session.user = noPwUser;
 
         return res.redirect("/me");
     } catch (error) {
@@ -140,7 +155,7 @@ export const verifyEmail = async (req, res, next) => {
             req.flash("success", `${findUser.name}님의 이메일 인증 성공👋`);
             return res.redirect("/");
         } else {
-            console.log("string값이 틀립니다");
+            req.flash("error", "잘못된접근입니다");
             return res.redirect("/");
         }
     } catch (error) {

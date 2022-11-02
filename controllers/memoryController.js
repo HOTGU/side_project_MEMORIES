@@ -1,18 +1,9 @@
 import Memory from "../model/Memory.js";
-import createError from "../utils/createError.js";
 
-export const home = async (req, res, next) => {
-    try {
-        const memories = await Memory.find().populate("creator");
-        return res.render("memory", { title: "Memory", memories });
-    } catch (error) {
-        next(error);
-    }
-};
 export const upload = (req, res) => {
-    console.log(req.memory);
     return res.render("upload");
 };
+
 export const uploadPost = async (req, res, next) => {
     const {
         file: { path },
@@ -27,7 +18,7 @@ export const uploadPost = async (req, res, next) => {
             creator: user._id,
         });
         await memory.save();
-        return res.redirect("/memory");
+        return res.redirect("/");
     } catch (error) {
         next(error);
     }
@@ -92,4 +83,19 @@ export const remove = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+};
+
+export const search = async (req, res, next) => {
+    const {
+        query: { searchTerm },
+    } = req;
+    try {
+        if (!searchTerm) {
+            req.flash("error", "검색어가 없습니다");
+            return res.redirect("/");
+        }
+        const searchedMemories = await Memory.find({
+            title: { $regex: searchTerm, $options },
+        });
+    } catch (error) {}
 };

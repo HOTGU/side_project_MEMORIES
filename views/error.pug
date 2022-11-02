@@ -1,5 +1,7 @@
 extends layout.pug
 
 block content
-  h1 에러코드는 #{errorStatus}입니다
-  h3 메세지는 #{errorMessage}
+  .container
+    h1 에러코드는 #{errorStatus}입니다
+    h3 메세지는 #{errorMessage}
+    a(href="/") 홈으로가기

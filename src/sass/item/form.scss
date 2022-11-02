@@ -1,0 +1,37 @@
+@import "../config/_variable";
+
+.form {
+    max-width: 400px;
+    width: 100%;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    &__head {
+        font-size: 24px;
+        font-weight: 700;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 40px;
+        box-shadow: $boxShadow;
+        input,
+        textarea {
+            width: 100%;
+            padding: 15px;
+        }
+        textarea {
+            height: 150px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: $blue;
+            color: $bgColor;
+            font-size: 16px;
+            font-weight: 700;
+        }
+    }
+}

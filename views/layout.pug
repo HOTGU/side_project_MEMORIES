@@ -8,7 +8,8 @@ html
                     div.message#success=message.success
                 if message.error
                     div.message#error=message.error
-        include includes/nav.pug
-        block content
+        .bodyWrapper
+            include includes/nav.pug
+            block content
         include includes/footer.pug
         block js

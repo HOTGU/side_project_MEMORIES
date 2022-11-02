@@ -1,16 +1,14 @@
 extends layout.pug
 
-block css
-    link(rel="stylesheet" type="text/css"  href="/static/css/imgPreview.css")
-
-
 block content
-    form(action=`/memory/${memory._id}/update`, method="POST" enctype="multipart/form-data")
-        img(src=`/${memory.thumbnail}`)#preview.imgThumbnail
-        #js-fileName
-        input(type="file" name="thumbnail")
-        input(type="text" name="title" value=memory.title placeholder="제목")
-        textarea(name="description" placeholder="본문")=memory.description
-        button 업데이트
+    .form
+        form(action=`/memory/${memory._id}/update`, method="POST" enctype="multipart/form-data")
+            img(src=`/${memory.thumbnail}`)#preview.imgThumbnail
+            #js-fileName
+            input(type="file" name="thumbnail")
+            input(type="text" name="title" value=memory.title placeholder="제목")
+            textarea(name="description" placeholder="본문")=memory.description
+            input(type="submit" value="업데이트")
+
 block js
-    script(src="/static/js/imagePreview.js") 
+    script(src="/static/js/imgPreview.js") 

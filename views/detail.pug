@@ -1,14 +1,25 @@
 extends layout.pug
 
 
+include mixins/userBlock
+
 block content
-    .memory
-        img(src=`/${memory.thumbnail}`)
-        h1=memory.title
-        p=memory.description
-        h2 글쓴이: #{memory.creator.name}
-    if user._id === `${memory.creator._id}`
-        a(href=`/memory/${memory._id}/update`) 
-            button 수정하기
-        a(href=`/memory/${memory._id}/delete`) 
-            button 삭제하기
+    .container
+        .memoryDetail
+            .memory
+                .memory__img
+                    img(src=`/${memory.thumbnail}`)
+                .memory__info
+                    h1=memory.title
+                    p=memory.description
+                    if user._id === `${memory.creator._id}`
+                        .btnContainer
+                            a(href=`/memory/${memory._id}/update`) 
+                                button.btn.updateBtn 수정하기
+                            a(href=`/memory/${memory._id}/delete`) 
+                                button.btn.deleteBtn 삭제하기
+                    .memory__info__creator
+                        +userBlock({
+                            avatar:memory.creator.avatar,
+                            name:memory.creator.name
+                        })

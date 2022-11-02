@@ -1,0 +1,7 @@
+mixin userBlock(user={})
+    .creator
+        if user.avatar 
+            img(src=`/${user.avatar}`, alt="")
+        else 
+            img(src="/static/images/no_user.png")
+        h2 #{user.name}
