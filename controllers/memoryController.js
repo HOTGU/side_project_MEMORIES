@@ -94,8 +94,5 @@ export const search = async (req, res, next) => {
             req.flash("error", "검색어가 없습니다");
             return res.redirect("/");
         }
-        const searchedMemories = await Memory.find({
-            title: { $regex: searchTerm, $options },
-        });
     } catch (error) {}
 };
