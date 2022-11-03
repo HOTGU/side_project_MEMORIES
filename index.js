@@ -72,11 +72,6 @@ app.use("/static", express.static(__dirname + "/static"));
 app.use("/uploads", express.static("uploads"));
 
 app.use(resLocalsMiddleware);
-// app.use(csrfProtection);
-// app.use((req, res, next) => {
-//     res.cookie("X-CSRF-TOKEN", req.csrfToken());
-//     next();
-// });
 
 app.use("/", globalRouter);
 app.use("/memory", memoryRouter);

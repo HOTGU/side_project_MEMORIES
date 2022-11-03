@@ -1,0 +1,7 @@
+mixin userColumnBlock(user={})
+    .user
+        if user.avatar
+            img(src=`/${user.avatar}`).imgAvatar
+        else
+            img(src="/static/images/no_user.png").imgAvatar
+        h1.user__name=user.name

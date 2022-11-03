@@ -18,6 +18,7 @@ export const uploadPost = async (req, res, next) => {
             creator: user._id,
         });
         await memory.save();
+        req.flash("success", "업로드 성공😀😀");
         return res.redirect("/");
     } catch (error) {
         next(error);
@@ -55,6 +56,7 @@ export const update = async (req, res, next) => {
                 new: true,
             }
         );
+        req.flash("success", "업데이트 성공😀");
         return res.redirect(`/memory/${id}`);
     } catch (error) {
         next(error);
@@ -78,8 +80,10 @@ export const remove = async (req, res, next) => {
         params: { id },
     } = req;
     try {
+        req.flash("success", "삭제 성공😀");
+
         await Memory.findOneAndDelete(id);
-        res.redirect("/memory");
+        res.redirect("/");
     } catch (error) {
         next(error);
     }
@@ -94,6 +98,18 @@ export const search = async (req, res, next) => {
             req.flash("error", "검색어가 없습니다");
             return res.redirect("/");
         }
-        console.log(3);
-    } catch (error) {}
+
+        const searchedMemories = await Memory.find({
+            title: { $regex: searchTerm },
+        }).populate("creator");
+
+        return res.render("home", {
+            title: "Search",
+            memories: searchedMemories,
+            searchTerm,
+        });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
 };

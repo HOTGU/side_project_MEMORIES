@@ -8,18 +8,25 @@ block content
         .homeHead
           a(href="/memory/upload")
             .homeHead__btn 업로드 ⬆
-          form(action=`/search` method="GET")
+          form(action=`/memory/search` method="GET")
             input(name="searchTerm" type="text" placeholder="검색")
-        .memoryContainer
-          each memory in memories
-            +memoryBlock({
-              _id:memory._id,
-              thumbnail:memory.thumbnail,
-              title:memory.title,
-              description:memory.description,
-              creator:memory.creator
-            })
+        if searchTerm 
+          .searchTerm #{searchTerm}(으)로 검색한 결과입니다
+        if memories.length > 0
+          .memoryContainer
+            each memory in memories
+              +memoryBlock({
+                _id:memory._id,
+                thumbnail:memory.thumbnail,
+                title:memory.title,
+                description:memory.description,
+                creator:memory.creator
+              })
+        else 
+          .center 검색결과가 없습니다
+                
       else 
         h1.center 이메일인증이 안됐습니다.
     else 
       h1.center 로그인하세요
+

@@ -1,12 +1,20 @@
-.me {
+.user {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 150px 0;
+    margin-top: 150px;
+    margin-bottom: 50px;
     gap: 20px;
     &__name {
         font-size: 20px;
         font-weight: 700;
     }
+}
+
+.userBtnContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

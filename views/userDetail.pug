@@ -1,0 +1,19 @@
+extends layout.pug
+include mixins/memoryBlock
+include mixins/userColumnBlock
+
+block content
+    .container
+        +userColumnBlock({
+                avatar:user.avatar,
+                name:user.name
+            })
+        div #{user.name}님의 MEMORIES
+        .memoryContainer
+            each memory in memories
+              +memoryBlock({
+                _id:memory._id,
+                thumbnail:memory.thumbnail,
+                title:memory.title,
+                description:memory.description,
+              })

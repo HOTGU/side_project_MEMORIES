@@ -15,9 +15,9 @@
             object-fit: cover;
         }
         h3 {
-            display: none;
             position: absolute;
             top: 0;
+            display: none;
             transition: all 0.2s ease-in-out;
         }
         &:hover {

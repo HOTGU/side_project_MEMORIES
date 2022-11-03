@@ -1,6 +1,5 @@
 extends layout.pug
 
-
 include mixins/userBlock
 
 block content
@@ -21,5 +20,6 @@ block content
                     .memory__info__creator
                         +userBlock({
                             avatar:memory.creator.avatar,
-                            name:memory.creator.name
+                            name:memory.creator.name,
+                            _id:memory.creator._id
                         })

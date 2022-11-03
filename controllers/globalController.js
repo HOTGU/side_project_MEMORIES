@@ -4,9 +4,8 @@ dotenv.config();
 
 import Memory from "../model/Memory.js";
 import User from "../model/User.js";
-import createError from "../utils/createError.js";
 import deletePassword from "../utils/deletePassword.js";
-import transport from "../utils/sendEmail.js";
+import sendMail from "../utils/sendEmail.js";
 
 export const home = async (req, res) => {
     try {
@@ -52,14 +51,10 @@ export const joinPost = async (req, res, next) => {
         const noPwUser = deletePassword(newUser);
         req.session.user = noPwUser;
         req.flash("success", `회원가입 성공👋`);
-        res.redirect("/");
 
-        return transport.sendMail({
-            to: email,
-            subject: "hello world",
-            html: `<h1>아래링크를 눌러줘야 이메일인증이 완료됩니다</h1><a href="http://localhost:5000/verify?key=${newUser.emailVerifyString}">
-                http://localhost:5000/verify?key=${newUser.emailVerifyString}</a>`,
-        });
+        sendMail(email, newUser.emailVerifyString);
+
+        res.redirect("/");
     } catch (error) {
         next(error);
     }

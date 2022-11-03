@@ -35,11 +35,11 @@
         font-weight: 600;
     }
     #success {
-        background-color: #156e3a;
+        background-color: $blue;
         color: white;
     }
     #error {
-        background-color: #7b261c;
+        background-color: $red;
         color: white;
     }
 }
@@ -65,16 +65,15 @@ body {
     }
     .bodyWrapper {
         height: auto;
-        min-height: 90%;
+        min-height: 100%;
         margin-bottom: $footerHeight;
     }
 }
 
 footer {
-    border-top: 1px solid $borderColor;
     height: $footerHeight;
-    position: relative;
     transform: translateY(-100%);
+    border-top: 1px solid $borderColor;
     display: flex;
     align-items: center;
     justify-content: center;

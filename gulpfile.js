@@ -32,17 +32,17 @@ const cleanJs = (cb) => {
     src("./static/js/*.js").pipe(clean({ read: false }));
     cb();
 };
-// const cleanCss = (cb) => {
-//     src("./static/css/**/*.css").pipe(clean({ read: false }));
-//     cb();
-// };
+const cleanImages = (cb) => {
+    src("./static/images/*").pipe(clean({ read: false }));
+    cb();
+};
 
 const watchFiles = () => {
     watch("./src/js/**/*.js", cleanJs);
+    watch("./src/images/*", cleanImages);
     watch("./src/js/**/*.js", js);
     watch("./src/images/*", image);
     watch("./src/sass/**/*.scss", css);
 };
 
 export default series(js, css, image, watchFiles);
-// export default series(js, css, image, watchFiles);
