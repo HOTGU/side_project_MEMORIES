@@ -5,8 +5,9 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "export NODE_ENV=development && nodemon index.js"
+        "start": "node index.js",
+        "dev:server": "export NODE_ENV=development && nodemon index.js",
+        "dev:assets" : "gulp"
     },
     "author": "",
     "license": "ISC",

@@ -1,5 +1,4 @@
 import express from "express";
-import csrf from "csurf";
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
@@ -20,9 +19,16 @@ import userRouter from "./routes/userRouter.js";
 import { resLocalsMiddleware } from "./middleware.js";
 
 const app = express();
-const csrfProtection = csrf({ cookie: true });
 
-mongoose.connect(process.env.DEV_MONGO_URL, {
+let mongoUrl;
+
+if (process.env.NODE_ENV === "production") {
+    mongoUrl = process.env.PROD_MONGO_URL; //MONGO ATLAS
+} else {
+    mongoUrl = process.env.DEV_MONGO_URL; // LOCAL MONGO
+}
+
+mongoose.connect(mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -49,7 +55,9 @@ app.use(
         contentSecurityPolicy: cspOptions,
     })
 );
-app.use(morgan("dev"));
+if (process.env.NODE_ENV === "development") {
+    app.use(morgan("dev"));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -59,7 +67,7 @@ app.use(
         resave: false,
         saveUninitialized: true,
         store: MongoStore.create({
-            mongoUrl: process.env.DEV_MONGO_URL,
+            mongoUrl,
         }),
     })
 );
