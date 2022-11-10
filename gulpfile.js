@@ -32,7 +32,7 @@ const cleanJs = (cb) => {
     cb();
 };
 const cleanCSS = (cb) => {
-    src("./static/styles.css").pipe(clean({ allowEmpty: true, read: false }));
+    src("./static/css/*.css").pipe(clean({ allowEmpty: true, read: false }));
     cb();
 };
 const cleanImages = (cb) => {
