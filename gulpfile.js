@@ -28,15 +28,15 @@ const image = (cb) => {
 };
 
 const cleanJs = (cb) => {
-    src("./static/js/*.js").pipe(clean({ read: false }));
+    src("./static/js/*.js").pipe(clean({ allowEmpty: true, read: false }));
     cb();
 };
 const cleanCSS = (cb) => {
-    src("./static/styles.css").pipe(clean({ read: false }));
+    src("./static/styles.css").pipe(clean({ allowEmpty: true, read: false }));
     cb();
 };
 const cleanImages = (cb) => {
-    src("./static/images/*").pipe(clean({ read: false }));
+    src("./static/images/*").pipe(clean({ allowEmpty: true, read: false }));
     cb();
 };
 
