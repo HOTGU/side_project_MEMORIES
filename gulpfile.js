@@ -31,7 +31,7 @@ const cleanJs = (cb) => {
     src("./static/js/*.js").pipe(clean({ read: false }));
     cb();
 };
-const cleanCss = (cb) => {
+const cleanCSS = (cb) => {
     src("./static/styles.css").pipe(clean({ read: false }));
     cb();
 };
@@ -49,5 +49,5 @@ const watchFiles = () => {
 };
 
 export const dev = series(js, css, image, watchFiles);
-export const build = series(cleanJs, cleanCss, cleanImages, js, css, image);
+export const build = series(cleanJs, cleanCSS, cleanImages, js, css, image);
 // export default series(js, css, image, watchFiles);

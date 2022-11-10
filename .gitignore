@@ -1,4 +1,4 @@
-/node_modules
+node_modules/
+uploads/
+static/
 .env
-/uploads
-/static
