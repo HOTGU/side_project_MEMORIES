@@ -119,7 +119,7 @@ export const meUpdatePost = async (req, res, next) => {
             user._id,
             {
                 name,
-                avatar: file?.path,
+                avatar: file?.location,
             },
             { new: true }
         );

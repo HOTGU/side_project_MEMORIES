@@ -4,7 +4,7 @@ block content
     .form
         form(action=`/me/update`, method="POST" enctype="multipart/form-data")
             if user.avatar
-                img(src=`/${user.avatar}`)#preview.imgAvatar
+                img(src=`${user.avatar}` crossorigin="annoymous")#preview.imgAvatar
             else
                 img(src="/static/images/no_user.png")#preview.imgAvatar
             #js-fileName

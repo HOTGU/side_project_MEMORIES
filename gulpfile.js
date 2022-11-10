@@ -2,7 +2,6 @@ import gulpPkg from "gulp";
 const { src, dest, watch, series } = gulpPkg;
 import clean from "gulp-clean";
 import cleanCss from "gulp-clean-css";
-
 import defaultSass from "sass";
 import gulpSass from "gulp-sass";
 const sass = gulpSass(defaultSass);
@@ -45,4 +44,6 @@ const watchFiles = () => {
     watch("./src/sass/**/*.scss", css);
 };
 
-export default series(js, css, image, watchFiles);
+export const dev = series(js, css, image, watchFiles);
+export const prod = series(js, css, image);
+// export default series(js, css, image, watchFiles);

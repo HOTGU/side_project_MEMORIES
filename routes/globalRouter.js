@@ -11,7 +11,7 @@ import {
     meUpdatePost,
     verifyEmail,
 } from "../controllers/globalController.js";
-import { avatarMulter, isVerifiedEmail } from "../middleware.js";
+import { s3MulterUpload, isVerifiedEmail } from "../middleware.js";
 
 const globalRouter = express.Router();
 
@@ -25,7 +25,7 @@ globalRouter.get("/me/update", isVerifiedEmail, meUpdate);
 globalRouter.post(
     "/me/update",
     isVerifiedEmail,
-    avatarMulter.single("avatar"),
+    s3MulterUpload.single("avatar"),
     meUpdatePost
 );
 

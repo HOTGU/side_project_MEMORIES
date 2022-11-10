@@ -6,13 +6,13 @@ export const upload = (req, res) => {
 
 export const uploadPost = async (req, res, next) => {
     const {
-        file: { path },
+        file: { location },
         body: { title, description },
         user,
     } = req;
     try {
         const memory = new Memory({
-            thumbnail: path,
+            thumbnail: location,
             title,
             description,
             creator: user._id,

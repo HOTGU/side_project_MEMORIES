@@ -46,7 +46,11 @@ const cspOptions = {
 
         "script-src": ["'self'"],
 
-        "img-src": ["'self'", "blob:"],
+        "img-src": [
+            "'self'",
+            "blob:",
+            "https://memories-express-sideproject.s3.ap-northeast-2.amazonaws.com",
+        ],
     },
 };
 

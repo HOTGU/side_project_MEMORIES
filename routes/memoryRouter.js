@@ -1,5 +1,5 @@
 import express from "express";
-import { isCreator, isVerifiedEmail, thumbnailMulter } from "../middleware.js";
+import { isCreator, isVerifiedEmail, s3MulterUpload } from "../middleware.js";
 import {
     detail,
     remove,
@@ -19,7 +19,7 @@ memoryRouter.get("/search", isVerifiedEmail, search);
 memoryRouter.post(
     "/upload",
     isVerifiedEmail,
-    thumbnailMulter.single("thumbnail"),
+    s3MulterUpload.single("thumbnail"),
     uploadPost
 );
 
@@ -30,7 +30,7 @@ memoryRouter.post(
     "/:id/update",
     isVerifiedEmail,
     isCreator,
-    thumbnailMulter.single("thumbnail"),
+    s3MulterUpload.single("thumbnail"),
     update
 );
 memoryRouter.get("/:id/delete", isVerifiedEmail, isCreator, remove);
