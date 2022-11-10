@@ -19,6 +19,7 @@ import userRouter from "./routes/userRouter.js";
 import { resLocalsMiddleware } from "./middleware.js";
 
 const app = express();
+const port = process.env.PORT || 8080;
 
 let mongoUrl;
 
@@ -100,4 +101,4 @@ const handleListen = () => {
     console.log(`✅ 서버가 ${process.env.PORT}에서 실행중이야`);
 };
 
-app.listen(process.env.PORT, handleListen);
+app.listen(port, handleListen);
