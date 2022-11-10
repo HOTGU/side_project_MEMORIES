@@ -28,4 +28,4 @@ const handleChange = (e) => {
 img.addEventListener("click", () => imgFile.click());
 imgFile.addEventListener("change", handleChange);
 
-console.log("변경");
+console.log("변경2");
