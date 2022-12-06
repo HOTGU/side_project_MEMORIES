@@ -12,9 +12,6 @@ const s3 = new aws.S3({
     region: process.env.AWS_S3_REGION,
 });
 
-// export const thumbnailMulter = multer({ dest: "uploads/thumbnail" });
-// export const avatarMulter = multer({ dest: "uploads/avatar" });
-
 export const s3MulterUpload = multer({
     storage: multerS3({
         s3,
@@ -26,18 +23,6 @@ export const s3MulterUpload = multer({
         },
     }),
 });
-
-// export const avatarMulter = multer({
-//     storage: multerS3({
-//         s3,
-//         bucket: process.env.AWS_S3_BUCKET,
-//         acl: "public-read",
-//         key: function (req, file, cb) {
-//             console.log(file);
-//             cb(null, Date.now() + file.originalname);
-//         },
-//     }),
-// });
 
 export const resLocalsMiddleware = (req, res, next) => {
     res.locals.isLogin = Boolean(req.session.isLogin);
