@@ -10,7 +10,7 @@ import sendMail from "../utils/sendEmail.js";
 export const home = async (req, res) => {
     try {
         const memories = await Memory.find().populate("creator");
-        return res.render("home", { title: "Home", memories });
+        return res.render("home", { title: "Home!", memories });
     } catch (error) {
         next(error);
     }
