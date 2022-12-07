@@ -37,7 +37,7 @@ console.log(mongoUrl);
 
 mongoose.connect(mongoUrl, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    autoIndex: false,
 });
 
 const dbErrorHandler = () => console.log("❌ DB 연결 실패");
