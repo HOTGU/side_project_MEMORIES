@@ -62,6 +62,13 @@ app.use(
         contentSecurityPolicy: cspOptions,
     })
 );
+
+const corsOption = {
+    origin: "https://memories-express-sideproject.s3.ap-northeast-2.amazonaws.com",
+    credential: true,
+};
+
+app.use(cors(corsOption));
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
