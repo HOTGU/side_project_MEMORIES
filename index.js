@@ -33,6 +33,8 @@ if (process.env.NODE_ENV === "production") {
     mongoUrl = process.env.PROD_MONGO_URL; //MONGO ATLAS
 }
 
+console.log(mongoUrl);
+
 mongoose.connect(mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -45,19 +47,6 @@ const db = mongoose.connection;
 db.on("error", dbErrorHandler);
 db.once("open", dbSuccessHandler);
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-});
-
-// const corsOption = {
-//     origin: "*.amazonaws.com",
-// };
-
 const cspOptions = {
     directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
@@ -68,7 +57,6 @@ const cspOptions = {
     },
 };
 
-// app.use(cors(corsOption));
 app.use(
     helmet({
         contentSecurityPolicy: cspOptions,

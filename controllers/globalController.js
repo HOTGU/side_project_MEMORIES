@@ -7,7 +7,7 @@ import User from "../model/User.js";
 import deletePassword from "../utils/deletePassword.js";
 import sendMail from "../utils/sendEmail.js";
 
-export const home = async (req, res) => {
+export const home = async (req, res, next) => {
     try {
         const memories = await Memory.find().populate("creator");
         return res.render("home", { title: "Home!", memories });
