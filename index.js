@@ -45,27 +45,27 @@ const db = mongoose.connection;
 db.on("error", dbErrorHandler);
 db.once("open", dbSuccessHandler);
 
-const corsOption = {
-    origin: "*.amazonaws.com",
-};
+// const corsOption = {
+//     origin: "*.amazonaws.com",
+// };
 
-const cspOptions = {
-    directives: {
-        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+// const cspOptions = {
+//     directives: {
+//         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
 
-        "script-src": ["'self'"],
+//         "script-src": ["'self'"],
 
-        "img-src": ["'self'", "blob:", "*.amazonaws.com"],
-    },
-};
+//         "img-src": ["'self'", "blob:", "*.amazonaws.com"],
+//     },
+// };
 
-app.use(cors(corsOption));
-app.use(
-    helmet({
-        contentSecurityPolicy: cspOptions,
-        crossOriginEmbedderPolicy: false,
-    })
-);
+// app.use(cors(corsOption));
+// app.use(
+//     helmet({
+//         contentSecurityPolicy: cspOptions,
+//         crossOriginEmbedderPolicy: false,
+//     })
+// );
 
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
