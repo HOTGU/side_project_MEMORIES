@@ -7,10 +7,12 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import sessions from "express-session";
 import MongoStore from "connect-mongo";
+
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 import flash from "connect-flash";
 
 import globalRouter from "./routes/globalRouter.js";
