@@ -3,7 +3,7 @@ extends layout.pug
 block content
     .form
         form(action=`/memory/${memory._id}/update`, method="POST" enctype="multipart/form-data")
-            img(src=`${memory.thumbnail}`)#preview.imgThumbnail
+            img(src=`${memory.thumbnail}` crossorigin="anonymous")#preview.imgThumbnail
             #js-fileName
             input(type="file" name="thumbnail")
             input(type="text" name="title" value=memory.title placeholder="제목")
