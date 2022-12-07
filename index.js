@@ -46,8 +46,7 @@ db.on("error", dbErrorHandler);
 db.once("open", dbSuccessHandler);
 
 const corsOption = {
-    origin: "https://memories-express-sideproject.s3.ap-northeast-2.amazonaws.com",
-    credential: true,
+    origin: "*.amazonaws.com",
 };
 
 const cspOptions = {
@@ -56,11 +55,7 @@ const cspOptions = {
 
         "script-src": ["'self'"],
 
-        "img-src": [
-            "'self'",
-            "blob:",
-            "https://memories-express-sideproject.s3.ap-northeast-2.amazonaws.com",
-        ],
+        "img-src": ["'self'", "blob:", "*.amazonaws.com"],
     },
 };
 
