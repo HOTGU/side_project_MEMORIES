@@ -6,8 +6,7 @@
     "main": "index.js",
     "scripts": {
         "start": "node index.js",
-        "build": "gulp prod",
-        // "build": "[memories] build --output public",
+        "build": "[memories] build --output public && gulp prod",
         "dev:server": "export NODE_ENV=development && nodemon index.js",
         "dev:assets": "gulp dev"
     },
