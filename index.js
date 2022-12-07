@@ -29,7 +29,8 @@ let mongoUrl;
 if (process.env.NODE_ENV === "production") {
     mongoUrl = process.env.PROD_MONGO_URL; //MONGO ATLAS
 } else {
-    mongoUrl = process.env.DEV_MONGO_URL; // LOCAL MONGO
+    // mongoUrl = process.env.DEV_MONGO_URL; // LOCAL MONGO
+    mongoUrl = process.env.PROD_MONGO_URL; //MONGO ATLAS
 }
 
 mongoose.connect(mongoUrl, {
@@ -43,6 +44,11 @@ const dbSuccessHandler = () => console.log("✅ DB 연결 성공");
 const db = mongoose.connection;
 db.on("error", dbErrorHandler);
 db.once("open", dbSuccessHandler);
+
+const corsOption = {
+    origin: "https://memories-express-sideproject.s3.ap-northeast-2.amazonaws.com",
+    credential: true,
+};
 
 const cspOptions = {
     directives: {
@@ -58,18 +64,14 @@ const cspOptions = {
     },
 };
 
+app.use(cors(corsOption));
 app.use(
     helmet({
         contentSecurityPolicy: cspOptions,
+        crossOriginEmbedderPolicy: false,
     })
 );
 
-const corsOption = {
-    origin: "https://memories-express-sideproject.s3.ap-northeast-2.amazonaws.com",
-    credential: true,
-};
-
-app.use(cors(corsOption));
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
