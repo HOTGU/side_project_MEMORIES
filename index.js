@@ -80,9 +80,10 @@ app.use(
 app.use(flash());
 
 app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "/views"));
 app.use("/src", express.static("src"));
 app.use("/static", express.static(__dirname + "/static"));
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 app.use(resLocalsMiddleware);
 
